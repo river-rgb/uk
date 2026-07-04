@@ -302,7 +302,7 @@
       const urlParams = new URLSearchParams(window.location.search);
       const utmParams = {};
       for (const [key, value] of urlParams.entries()) {
-        if (key.startsWith('utm_')) {
+        if (key.toLowerCase().startsWith('utm_')) {
           utmParams[key] = value;
         }
       }
@@ -315,7 +315,13 @@
         return baseUrl;
       }
       
-      const url = new URL(baseUrl);
+      let url;
+      try {
+        url = new URL(baseUrl);
+      } catch (e) {
+        url = new URL('https://cyvarony.com/newlp/');
+      }
+      
       Object.entries(utmParams).forEach(([key, value]) => {
         url.searchParams.set(key, value);
       });
@@ -330,7 +336,6 @@
       
       if (ageGate) ageGate.style.display = 'flex';
       
-      // Hide main content
       if (mainContent) mainContent.classList.add('hidden-content');
       if (header) header.classList.add('hidden-content');
       if (footer) footer.classList.add('hidden-content');
@@ -344,13 +349,12 @@
       
       if (ageGate) ageGate.style.display = 'none';
       
-      // Show content
       if (mainContent) mainContent.classList.remove('hidden-content');
       if (header) header.classList.remove('hidden-content');
       if (footer) footer.classList.remove('hidden-content');
     }
 
-    // Initialize Age Gate
+    // Initialize
     document.addEventListener('DOMContentLoaded', function() {
       if (isMobile()) {
         showAgeGate();
@@ -359,7 +363,7 @@
       }
     });
 
-    // Button click handler
+    // Button handler
     document.addEventListener('click', function(event) {
       if (event.target && event.target.id === 'confirm-age') {
         const redirectUrl = buildRedirectUrl('https://cyvarony.com/newlp/');
@@ -367,43 +371,12 @@
       }
     });
 
-    // Handle window resize
-    let resizeTimeout;
+    // Resize handler
     window.addEventListener('resize', function() {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        if (!isMobile()) {
-          hideAgeGateAndShowContent();
-        }
-      }, 200);
+      if (!isMobile()) {
+        hideAgeGateAndShowContent();
+      }
     });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
