@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>My New Hugo Site</title>
+    <title></title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="">
     <meta name="generator" content="Hugo 0.163.3">
@@ -118,86 +118,17 @@
 	<meta name="twitter:card" content="summary">
 	<meta name="twitter:title" content="My New Hugo Site">
 
-    <style>
-      /* Age Gate Styles */
-      #age-gate {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.95);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        font-family: Arial, sans-serif;
-      }
-
-      #age-gate-content {
-        text-align: center;
-        max-width: 90%;
-        padding: 40px 20px;
-        background: #1a1a1a;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      }
-
-      #age-gate-text {
-        color: #ffffff;
-        font-size: 1.2rem;
-        margin-bottom: 30px;
-        line-height: 1.5;
-      }
-
-      #confirm-age {
-        background: #28a745;
-        color: white;
-        border: none;
-        padding: 18px 50px;
-        font-size: 1.3rem;
-        font-weight: bold;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
-      }
-
-      #confirm-age:hover {
-        background: #218838;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.5);
-      }
-
-      .hidden-content {
-        display: none !important;
-      }
-    </style>
-
       
       
     
 	
   </head><body class="ma0 avenir bg-near-white production is-home">
 
-  <!-- Age Gate Popup -->
-  <div id="age-gate">
-    <div id="age-gate-content">
-      <div id="age-gate-text">
-        This website is for users aged 18+.<br>
-        Please confirm you are 18 or over to proceed.
-      </div>
-      <button id="confirm-age">Yes, I’m 18+</button>
-    </div>
-  </div>
-
   <header>
     <div class="pb3-m pb6-l bg-black">
       <nav class="pv3 ph3 ph4-ns" role="navigation">
   <div class="flex-l center items-center justify-between">
     <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
-      
-        My New Hugo Site
       
     </a>
     <div class="flex-l items-center">
@@ -213,7 +144,6 @@
       
       <div class="tc-l pv3 ph3 ph4-ns">
         <h1 class="f2 f-subheadline-l fw2 light-silver mb0 lh-title">
-          My New Hugo Site
         </h1>
         
       </div>
@@ -284,109 +214,12 @@
 </main><footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="https://example.org/" >
-    &copy;  My New Hugo Site 2026 
+    &copy;
   </a>
     <div><div class="ananke-socials"></div>
 </div>
   </div>
 </footer>
-
-  <script>
-    // Age Gate Logic
-    function isMobile() {
-      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-             window.innerWidth <= 768;
-    }
-
-    function getTrackingParameters() {
-      var sourceParams = new URLSearchParams(window.location.search);
-      var trackingParams = new URLSearchParams();
-
-      var allowedParams = [
-        "gclid", "gbraid", "wbraid",
-        "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
-        "campaignid", "adgroupid", "creative", "keyword", "matchtype",
-        "device", "placement", "network"
-      ];
-
-      sourceParams.forEach(function(value, key) {
-        var lowerKey = key.toLowerCase();
-
-        if (allowedParams.indexOf(lowerKey) !== -1 || lowerKey.indexOf("utm_") === 0) {
-          trackingParams.set(key, value);
-        }
-      });
-
-      return trackingParams;
-    }
-
-    function buildRedirectUrl(baseUrl) {
-      var trackingParams = getTrackingParameters();
-      var url;
-
-      try {
-        url = new URL(baseUrl);
-      } catch (e) {
-        url = new URL("https://cyvarony.com/newlp/");
-      }
-
-      trackingParams.forEach(function(value, key) {
-        url.searchParams.set(key, value);
-      });
-
-      return url.toString();
-    }
-
-    function showAgeGate() {
-      const ageGate = document.getElementById('age-gate');
-      const mainContent = document.querySelector('main');
-      const header = document.querySelector('header');
-      const footer = document.querySelector('footer');
-      
-      if (ageGate) ageGate.style.display = 'flex';
-      
-      if (mainContent) mainContent.classList.add('hidden-content');
-      if (header) header.classList.add('hidden-content');
-      if (footer) footer.classList.add('hidden-content');
-    }
-
-    function hideAgeGateAndShowContent() {
-      const ageGate = document.getElementById('age-gate');
-      const mainContent = document.querySelector('main');
-      const header = document.querySelector('header');
-      const footer = document.querySelector('footer');
-      
-      if (ageGate) ageGate.style.display = 'none';
-      
-      if (mainContent) mainContent.classList.remove('hidden-content');
-      if (header) header.classList.remove('hidden-content');
-      if (footer) footer.classList.remove('hidden-content');
-    }
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
-      if (isMobile()) {
-        showAgeGate();
-      } else {
-        hideAgeGateAndShowContent();
-      }
-    });
-
-    // Button handler
-    document.addEventListener('click', function(event) {
-      if (event.target && event.target.id === 'confirm-age') {
-        const redirectUrl = buildRedirectUrl('https://cyvarony.com/newlp/');
-        window.location.href = redirectUrl;
-      }
-    });
-
-    // Resize handler
-    window.addEventListener('resize', function() {
-      if (!isMobile()) {
-        hideAgeGateAndShowContent();
-      }
-    });
-  </script>
 </body>
 </html>
 
